@@ -1,0 +1,23 @@
+{
+  "name": "tbms-chat",
+  "version": "0.0.1",
+  "description": "the page of chat ",
+  "author": "matrix ",
+  "scripts": {
+    "doc": "npx jsdoc -c conf.json -R README.md -r",
+    "pub": "npx lerna changed && npx lerna publish",
+    "bootstrap": "npx lerna bootstrap",
+    "hoist": "npx lerna bootstrap --hoist"
+  },
+  "keywords": [
+    "chat",
+    "page"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "ink-docstrap": "^1.3.2",
+    "jsdoc": "^3.5.5",
+    "lerna": "^3.4.0"
+  }
+}
