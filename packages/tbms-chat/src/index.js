@@ -24,6 +24,7 @@ const styles = {
   }
 }
 
+// 数据层沉淀的 `tbms-brandsdk-yunxin` SDK NPM包
 import YUNXINSDK from 'tbms-brandsdk-yunxin';
 
 const AVATOR_MAP = {
@@ -49,15 +50,16 @@ class App extends Component {
       Toast.show('uid and touid must be set!!!');
       return;
     }
+    // 初始化SDK，初始化参数及标准事件回调
     this.sdk = new YUNXINSDK({
-      uid: uid,
-      touid: touid,
-      onmsg: this.onMsg.bind(this),
-      onofflinemsg: this.onOfflineMsg.bind(this),
-      onerror: this.onError.bind(this),
-      onconversation: this.onConversation.bind(this),
-      onsystemmsg: this.onSystemMsg.bind(this),
-      onlogin: this.onLogin.bind(this)
+      uid: uid,                                         // 登录用户ID
+      touid: touid,                                     // 目标用户ID
+      onmsg: this.onMsg.bind(this),                     // 收到及时消息回调
+      onofflinemsg: this.onOfflineMsg.bind(this),       // 收到离线消息回调
+      onerror: this.onError.bind(this),                 // 错误情况回调
+      onconversation: this.onConversation.bind(this),   // 建立或者更改会话回调
+      onsystemmsg: this.onSystemMsg.bind(this),         // 系统消息回调
+      onlogin: this.onLogin.bind(this)                  // 登录信息回调
     });
     // 初始化会话
     this.conversation = {
@@ -85,6 +87,7 @@ class App extends Component {
       this.setState({
         MessageList
       }, () => {
+        // 滚动到页面底部
         this.horizontalScrollView.scrollTo({y: SCROLLTOP});
       })
     })
@@ -109,16 +112,12 @@ class App extends Component {
         isEmpty: true
       })
     }
-    componentParser.dispatch(msg, this.conversation).then(ctx => {
-      ctx;
-    })
   }
   onSystemMsg(msg) {
     Toast.show(msg.content || '这是一条系统消息');
   }
   
   onConversation(conversation) {
-    
     this.conversation = merge(this.conversation, conversation);
   }
 
